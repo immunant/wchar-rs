@@ -2,7 +2,9 @@ use wchar::wch;
 
 macro_rules! test_wch {
     ($s:expr) => {
-        assert_eq!(wch!($s), &*$s.encode_utf16().collect::<Vec<u16>>())
+        assert_eq!(wch!($s), &*$s.encode_utf16().collect::<Vec<u16>>());
+        assert_eq!(wch!(u16, $s), &*$s.encode_utf16().collect::<Vec<u16>>());
+        assert_eq!(wch!(u32, $s), &*$s.chars().map(|x| x as u32).collect::<Vec<u32>>());
     };
 }
 
